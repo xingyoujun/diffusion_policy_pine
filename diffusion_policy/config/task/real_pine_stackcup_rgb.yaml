@@ -9,9 +9,9 @@ shape_meta: &shape_meta
     right_camera:
       shape: ${task.image_shape}
       type: rgb
-    depth_camera:
-      shape: ${task.image_shape}
-      type: rgb
+    # depth_camera:
+    #   shape: ${task.image_shape}
+    #   type: rgb
     left_camera:
       shape: ${task.image_shape}
       type: rgb

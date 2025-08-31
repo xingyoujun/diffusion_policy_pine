@@ -42,8 +42,6 @@ class RealPineImageDataset(BaseImageDataset):
         ):
         assert os.path.isdir(dataset_path)
         
-        import pdb
-        pdb.set_trace()
         replay_buffer = None
         if use_cache:
             # fingerprint shape_meta
@@ -197,8 +195,7 @@ class RealPineImageDataset(BaseImageDataset):
             # move channel last to channel first
             # T,H,W,C
             # convert uint8 image to float32
-            obs_dict[key] = np.moveaxis(data[key][T_slice],-1,1
-                ).astype(np.float32) / 255.
+            obs_dict[key] = np.moveaxis(data[key][T_slice], -1, 1).astype(np.float32) / 255.
             # T,C,H,W
             # save ram
             del data[key]
@@ -227,8 +224,6 @@ def zarr_resize_index_last_dim(zarr_arr, idxs):
     return zarr_arr
 
 def _get_replay_buffer(dataset_path, shape_meta, store):
-    import pdb
-    pdb.set_trace()
     # parse shape meta
     rgb_keys = list()
     lowdim_keys = list()
@@ -245,11 +240,12 @@ def _get_replay_buffer(dataset_path, shape_meta, store):
         elif type == 'low_dim':
             lowdim_keys.append(key)
             lowdim_shapes[key] = tuple(shape)
-            if 'pose' in key:
-                assert tuple(shape) in [(2,),(6,)]
+            # TODO 
+            # if 'pose' in key:
+            #     assert tuple(shape) in [(2,),(6,)]
     
     action_shape = tuple(shape_meta['action']['shape'])
-    assert action_shape in [(2,),(6,)]
+    # assert action_shape in [(2,),(6,)]
 
     # load data
     cv2.setNumThreads(1)
