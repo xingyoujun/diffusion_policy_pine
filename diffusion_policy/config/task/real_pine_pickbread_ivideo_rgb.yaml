@@ -1,18 +1,18 @@
-name: pine_rgb
+name: pine_pickbread_ivideo_rgb
 
-image_shape: [3, 240, 320]
-dataset_path: data/pine_demos/stack_2cups
+image_shape: [3, 256, 256]
+dataset_path: ./data/pine_real_ivideo_rollout/pick_bread
 
 shape_meta: &shape_meta
   # acceptable types: rgb, low_dim
   obs:
-    right_camera:
+    main_camera:
       shape: ${task.image_shape}
       type: rgb
     # depth_camera:
     #   shape: ${task.image_shape}
     #   type: rgb
-    left_camera:
+    wrist_camera:
       shape: ${task.image_shape}
       type: rgb
     robot_eef_pose:
@@ -25,7 +25,7 @@ env_runner:
   _target_: diffusion_policy.env_runner.real_pine_image_runner.RealPineImageRunner
 
 dataset:
-  _target_: diffusion_policy.dataset.real_pine_image_dataset.RealPineImageDataset
+  _target_: diffusion_policy.dataset.rollout_pine_image_dataset.RolloutPineImageDataset
   shape_meta: *shape_meta
   dataset_path: ${task.dataset_path}
   horizon: ${horizon}

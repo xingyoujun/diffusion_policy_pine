@@ -140,3 +140,5 @@ dmypy.json
 .pyre/
 
 *.png
+
+dp_exp_ckpts
